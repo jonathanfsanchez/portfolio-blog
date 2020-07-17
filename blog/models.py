@@ -12,3 +12,6 @@ class BlogEntry(models.Model):
 
     # TODO: tags
     # tags = tagulous.models.TagField(to=SiteWideTags)
+
+    def __str__(self):
+        return self.title

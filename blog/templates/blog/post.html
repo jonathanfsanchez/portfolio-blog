@@ -1,0 +1,7 @@
+{% extends '__base.html' %}
+
+{% block title %}Jonathan F Sanchez | {{ blog.title }}{% endblock %}
+
+{% block content %}
+    <p>{{ blog.content | safe }}</p>
+{% endblock %}
