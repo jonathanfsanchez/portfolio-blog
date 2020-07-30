@@ -1,0 +1,24 @@
+<div class="container">
+    <h4 class="display-5">Education</h4>
+    {% for edu in education %}
+        <div class="card border-0 mb-3">
+            <div class="row no-gutters">
+                {% if edu.small_icon %}
+                    <div class="col-md-1">
+                        <img src={{ edu.small_icon.url }} class="card-img" alt="...">
+                    </div>
+                {% endif %}
+                <div class="col-md-auto">
+                    <div class="card-body">
+                        <p class="card-text text-muted">{{ edu.year_range_str }}</p>
+                        </p>
+                        <h5 class="card-title">{{ edu.school_name_full }}</h5>
+                        <p class="card-text">{{ edu.degree }} {{ edu.major }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        No Education to list
+    {% endfor %}
+</div>

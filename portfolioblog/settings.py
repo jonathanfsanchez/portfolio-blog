@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'portfolioblog.context_processors.social_media',
             ],
         },
     },
@@ -129,11 +130,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SERIALIZATION_MODULES = {
-    'xml':    'tagulous.serializers.xml_serializer',
-    'json':   'tagulous.serializers.json',
-    'python': 'tagulous.serializers.python',
-    'yaml':   'tagulous.serializers.pyyaml',
-}
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

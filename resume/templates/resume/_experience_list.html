@@ -1,0 +1,26 @@
+<div class="container">
+<h4 class="display-5">Experience</h4>
+{% for experience in experiences %}
+    <div class="card border-0 mb-3">
+        <div class="row no-gutters">
+            {% if experience.company_small_logo %}
+                <div class="col-md-2">
+                    <img src={{ experience.company_small_logo.url }} class="card-img" alt="...">
+                </div>
+            {% endif %}
+            <div class="col-md-10">
+                <div class="card-header bg-transparent border-0">{{ experience.month_year_range_str }}</div>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ experience.company }}</h5>
+                    <p class="card-text">{{ experience.title }}</p>
+                    <p class="card-text">{{ experience.description }}</p>
+                    <p class="card-text"><small class="text-muted">{{ experience.location }}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% empty %}
+    No Experience to list
+{% endfor %}
+</div>

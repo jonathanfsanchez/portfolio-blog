@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from resume.models import SocialMediaLink, Education, Skill, Course, Experience, Project
+from resume.models import SocialMedia, Education, Skill, Course, Experience, Project
 
 
-@admin.register(SocialMediaLink)
+@admin.register(SocialMedia)
 class SocialMediaLinkAdmin(admin.ModelAdmin):
     list_display = ('display_name',)
 

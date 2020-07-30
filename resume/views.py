@@ -1,21 +1,17 @@
 from django.shortcuts import render, get_object_or_404
 
-# Create your views here.
-from resume.models import Project, Skill, Course, Experience
+from resume.models import Project, Skill, Course, Experience, Education
 
 
 def resume_index(request, template_name='resume/index.html'):
     context = dict()
 
-    projects = Project.objects.all()
-    experiences = Experience.objects.all()
-    courses = Course.objects.all()
-    skills = Skill.objects.all()
+    context['projects'] = Project.objects.all()
+    context['experiences'] = Experience.objects.all()
+    context['education'] = Education.objects.all()
+    context['skills'] = Skill.objects.all()
+    context['courses'] = Course.objects.all()
 
-    context['projects'] = projects
-    context['experiences'] = experiences
-    context['courses'] = courses
-    context['skills'] = skills
     return render(request, template_name, context=context)
 
 

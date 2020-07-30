@@ -2,16 +2,19 @@ import tinymce.models
 from django.db import models
 
 
-class BlogEntry(models.Model):
+class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    url_title = models.SlugField()
+    title_slug = models.SlugField()
     title = models.TextField()
     content = tinymce.models.HTMLField()
 
     # TODO: tags
     # tags = tagulous.models.TagField(to=SiteWideTags)
+
+    class Meta:
+        ordering = ('-updated',)
 
     def __str__(self):
         return self.title

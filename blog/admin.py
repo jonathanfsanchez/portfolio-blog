@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from blog.models import BlogEntry
+from blog.models import Post
 
 
-@admin.register(BlogEntry)
+@admin.register(Post)
 class BlogEntryAdmin(admin.ModelAdmin):
-    list_display = ['created', 'updated', 'url_title', ]
+    list_display = ['created', 'updated', 'title_slug', ]

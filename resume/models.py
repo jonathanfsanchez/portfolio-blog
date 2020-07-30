@@ -5,7 +5,7 @@ from django.db import models
 get_rated_choices = list(zip(range(1, 10 + 1), range(1, 10 + 1)))
 
 
-class SocialMediaLink(models.Model):
+class SocialMedia(models.Model):
     display_name = models.TextField()
     url = models.URLField()
 
@@ -16,16 +16,10 @@ class SocialMediaLink(models.Model):
 
 
 class Education(models.Model):
-    class Degree(models.TextChoices):
-        ASSOCIATE = 'A'
-        BACHELOR = 'B'
-        MASTER = 'M'
-        DOCTORAL = 'D'
-
     year_start = models.PositiveSmallIntegerField()
     year_end = models.PositiveSmallIntegerField()
 
-    degree = models.CharField(max_length=1, choices=Degree.choices)
+    degree = models.TextField(help_text="e.g. Associates of Arts, or AA")
 
     major = models.TextField()
     minor = models.TextField(blank=True, default='')
@@ -34,7 +28,7 @@ class Education(models.Model):
     school_name_acronym = models.CharField(default='', max_length=10)
 
     description = models.TextField(blank=True, default='')
-    gpa = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(4.0)])
+    gpa = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(4.0)])
 
     small_icon = models.ImageField(blank=True, null=True, default=None)
 
@@ -100,6 +94,7 @@ class Experience(models.Model):
 
     title = models.TextField()
     description = models.TextField()
+    location = models.TextField()
 
     class Meta:
         ordering = ('-year_start',)
@@ -107,7 +102,7 @@ class Experience(models.Model):
     def month_year_range_str(self):
         range = "{month_start:0>2d}/{year_start} - ".format(month_start=self.month_start,
                                                                             year_start=self.year_start)
-        if self.current_job:
+        if self.is_current_job:
             range+= "Present"
         else:
             range+= "{month_end:0>2d}/{year_end}".format(month_end=self.month_end,
@@ -129,8 +124,6 @@ class Project(models.Model):
     year_end = models.PositiveSmallIntegerField(blank=True, null=True, default=None)
     is_wip = models.BooleanField(default=False)
 
-    social_media_url = models.OneToOneField(SocialMediaLink,
-                                            blank=True, null=True, default=None, on_delete=models.SET_NULL)
     git_url = models.URLField()
     title = models.TextField()
     title_slug = models.SlugField()

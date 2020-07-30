@@ -3,37 +3,30 @@
 {% block title %}Jonathan F Sanchez | Resume{% endblock %}
 
 {% block content %}
+
     {#    PROJECTS#}
-    {% for project in projects %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src={{ project.project_logo.url }} class="card-img" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <small class="text-muted">{{ project.get_date_range_str }}</small>
-                        </p>
-                        <h5 class="card-title">
-                            <a href="{% url 'resume:project_detail' project.title_slug %}">{{ project.title }}</a>
-                        </h5>
-                        <p class="card-text">{{ project.resume_content }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% empty %}
-        No Projects
-    {% endfor %}
+    <div class="row">
+        {% include "resume/_project_list.html" with projects=projects only %}
+    </div>
 
     {#    EXPERIENCE#}
+    <div class="row">
+        {% include "resume/_experience_list.html" with experiences=experiences only %}
+    </div>
 
     {#    EDUCATION#}
+    <div class="row">
+        {% include "resume/_education_list.html" with education=education only %}
+    </div>
 
     {#    SKILL#}
+    <div class="row">
+        {% include "resume/_skill_list.html" with skills=skills only %}
+    </div>
 
     {#    COURSES#}
-
+    <div class="row">
+        {% include "resume/_courses_list.html" with courses=courses only %}
+    </div>
 
 {% endblock %}
