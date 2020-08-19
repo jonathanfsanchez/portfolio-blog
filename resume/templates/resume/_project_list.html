@@ -1,20 +1,19 @@
 <div class="container">
-
     <h4 class="display-5">Projects</h4>
     {% for project in projects %}
         <div class="card border-0 mb-3">
             <div class="row no-gutters">
-                {% if project.project_logo %}
-                    <div class="col-md-2">
-                        <img src={{ project.project_logo.url }} class="card-img" alt="...">
-                    </div>
-                {% endif %}
-                <div class="col-md-auto">
+
+                <div class="col-md-3">
+                    <p class="text-muted pt-4">{{ project.get_date_range_str }}</p>
+                </div>
+
+                <div class="col-md-9">
                     <div class="card-body">
-                        <p class="card-text">
-                            <small class="text-muted">{{ project.get_date_range_str }}</small>
-                        </p>
                         <h5 class="card-title">
+                            {% if project.project_logo %}
+                                <img src="{{ project.project_logo.url }}" class="card-img" alt="...">
+                            {% endif %}
                             <a href="{% url 'resume:project_detail' project.title_slug %}">{{ project.title }}</a>
                         </h5>
                         <p class="card-text">{{ project.resume_content }}</p>

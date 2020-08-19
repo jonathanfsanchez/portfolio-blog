@@ -3,19 +3,24 @@
     {% for edu in education %}
         <div class="card border-0 mb-3">
             <div class="row no-gutters">
-                {% if edu.small_icon %}
-                    <div class="col-md-1">
-                        <img src={{ edu.small_icon.url }} class="card-img" alt="...">
-                    </div>
-                {% endif %}
-                <div class="col-md-auto">
+
+                <div class="col-md-3">
+                    <p class="text-muted pt-4">{{ edu.year_range_str }}</p>
+                </div>
+
+                <div class="col-md-9">
                     <div class="card-body">
-                        <p class="card-text text-muted">{{ edu.year_range_str }}</p>
-                        </p>
-                        <h5 class="card-title">{{ edu.school_name_full }}</h5>
-                        <p class="card-text">{{ edu.degree }} {{ edu.major }}</p>
+                        <h5 class="card-title">
+                            {% if edu.small_icon %}
+                                <img src="{{ edu.small_icon.url }}" class="card-img pr-2" alt="..." style="width: 50px">
+                            {% endif %}
+                            {{ edu.school_name_full }}
+
+                        </h5>
+                        <p class="card-text">{{ edu.degree }} in {{ edu.major }}</p>
                     </div>
                 </div>
+
             </div>
         </div>
     {% empty %}

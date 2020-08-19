@@ -28,7 +28,8 @@ class Education(models.Model):
     school_name_acronym = models.CharField(default='', max_length=10)
 
     description = models.TextField(blank=True, default='')
-    gpa = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(4.0)])
+    gpa = models.FloatField(blank=True, null=True, default=None,
+                            validators=[MinValueValidator(0.0), MaxValueValidator(4.0)])
 
     small_icon = models.ImageField(blank=True, null=True, default=None)
 
@@ -38,7 +39,8 @@ class Education(models.Model):
     def year_range_str(self):
         return "{start} - {end}".format(start=self.year_start,
                                         end=self.year_end if self.year_end else "Present")
-    year_range_str.short_description = "Dates" # This is so the admin page has correct column header
+
+    year_range_str.short_description = "Dates"  # This is so the admin page has correct column header
 
     def __str__(self):
         return "{years} : {school} - {major}".format(years=self.year_range_str(),
@@ -47,22 +49,23 @@ class Education(models.Model):
 
 
 class Skill(models.Model):
-    rated_value = models.PositiveSmallIntegerField(choices=get_rated_choices)
     # TODO make a tag
     skill = models.TextField()
 
     class Meta:
-        ordering = ('-rated_value',)
+        ordering = ('skill',)
 
     def __str__(self):
-        return self.skill + ": " + str(self.rated_value) + "/10"
+        return self.skill
 
 
 class Course(models.Model):
     vendor = models.TextField()
 
     year_start = models.PositiveSmallIntegerField(help_text="YYYY")
-    year_end = models.PositiveSmallIntegerField(help_text="YYYY")
+    year_end = models.PositiveSmallIntegerField(help_text="YYYY", blank=True, null=True, default=None)
+
+    is_expiration = models.BooleanField()
 
     title = models.TextField()
     description = models.TextField(blank=True, default='')
@@ -72,6 +75,12 @@ class Course(models.Model):
 
     class Meta:
         ordering = ('-year_start',)
+
+    def year_range_str(self):
+        if self.is_expiration:
+            return "{} - {}".format(self.year_start, self.year_end)
+        else:
+            return self.year_start
 
     def __str__(self):
         return "{year} {vendor} - {title}".format(year=self.year_start,
@@ -101,15 +110,16 @@ class Experience(models.Model):
 
     def month_year_range_str(self):
         range = "{month_start:0>2d}/{year_start} - ".format(month_start=self.month_start,
-                                                                            year_start=self.year_start)
+                                                            year_start=self.year_start)
         if self.is_current_job:
-            range+= "Present"
+            range += "Present"
         else:
-            range+= "{month_end:0>2d}/{year_end}".format(month_end=self.month_end,
-                                                    year_end=self.year_end)
+            range += "{month_end:0>2d}/{year_end}".format(month_end=self.month_end,
+                                                          year_end=self.year_end)
 
         return range
-    month_year_range_str.short_description = "Dates" # This is so the admin page has correct column header
+
+    month_year_range_str.short_description = "Dates"  # This is so the admin page has correct column header
 
     def __str__(self):
         return "{range} | {company} | {title}".format(

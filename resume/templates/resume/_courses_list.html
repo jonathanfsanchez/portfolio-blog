@@ -1,5 +1,32 @@
-{% for course in courses %}
+<div class="container">
+    <h4 class="display-5">Courses</h4>
+    {% for course in courses %}
+        <div class="card border-0 mb-3">
+            <div class="row no-gutters">
 
-{% empty %}
-    No Courses to list
-{% endfor %}
+                <div class="col-md-3">
+                    <p class="text-muted pt-4">{{ course.year_start }}</p>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {% if course.small_icon %}
+                                <img src="{{ course.small_icon.url }}" class="card-img pr-2" alt="..."
+                                     style="width: 50px">
+                            {% endif %}
+                            {{ course.vendor }}
+                        </h5>
+                        <p class="card-text"><a href="{{ course.link }}">{{ course.title }}</a></p>
+                        <p class="card-text">{{ course.description }}</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    {% empty %}
+        No Courses to list
+    {% endfor %}
+</div>

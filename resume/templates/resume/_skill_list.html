@@ -1,4 +1,11 @@
-{% for skill in skills %}
-{% empty %}
-    No Skills to list
-{% endfor %}
+<div class="container mb-3">
+    {% if skills %}
+    {% endif %}
+    <h4 class="display-5">Skills</h4>
+    {% for skill in skills %}
+            <span class="badge badge-pill badge-primary">{{ skill.skill | lower }}</span>
+    {% empty %}
+        No Skills to list
+    {% endfor %}
+</div>
+
