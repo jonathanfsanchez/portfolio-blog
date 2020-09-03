@@ -5,27 +5,27 @@
 {% block content %}
 
     {#    PROJECTS#}
-    <div class="row">
+    <div class="row shadow p-5 my-3">
         {% include "resume/_project_list.html" with projects=projects only %}
     </div>
 
     {#    EXPERIENCE#}
-    <div class="row">
+    <div class="row  shadow p-5 my-3">
         {% include "resume/_experience_list.html" with experiences=experiences only %}
     </div>
 
     {#    EDUCATION#}
-    <div class="row">
+    <div class="row  shadow p-5 my-3">
         {% include "resume/_education_list.html" with education=education only %}
     </div>
 
     {#    SKILL#}
-    <div class="row">
+    <div class="row  shadow p-5 my-3">
         {% include "resume/_skill_list.html" with skills=skills only %}
     </div>
 
     {#    COURSES#}
-    <div class="row">
+    <div class="row shadow p-5 my-3">
         {% include "resume/_courses_list.html" with courses=courses only %}
     </div>
 
