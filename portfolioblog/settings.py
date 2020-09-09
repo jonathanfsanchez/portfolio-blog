@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'resume',
     'tags',
+    'storages',
 ]
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -129,5 +130,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Development
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Production in SHARED hosting ENV such as namecheap.com CPANEL, must establish FTP account
+# MEDIA_URL= '/media/'
+# DEFAULT_FILE_STORAGE='storages.backends.ftp.FTPStorage'
+# FTP_STORAGE_LOCATION = 'ftp://<user>:<pw>@<host>:<port>/'
