@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'blog',
     'resume',
     'tags',
-    'storages',
 ]
 
 TINYMCE_DEFAULT_CONFIG = {

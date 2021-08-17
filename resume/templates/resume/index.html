@@ -3,30 +3,32 @@
 {% block title %}Jonathan F Sanchez | Resume{% endblock %}
 
 {% block content %}
-
-    {#    PROJECTS#}
-    <div class="row shadow p-5 my-3">
-        {% include "resume/_project_list.html" with projects=projects only %}
-    </div>
-
-    {#    EXPERIENCE#}
-    <div class="row  shadow p-5 my-3">
-        {% include "resume/_experience_list.html" with experiences=experiences only %}
-    </div>
-
-    {#    EDUCATION#}
-    <div class="row  shadow p-5 my-3">
-        {% include "resume/_education_list.html" with education=education only %}
-    </div>
-
-    {#    SKILL#}
-    <div class="row  shadow p-5 my-3">
-        {% include "resume/_skill_list.html" with skills=skills only %}
-    </div>
-
-    {#    COURSES#}
-    <div class="row shadow p-5 my-3">
-        {% include "resume/_courses_list.html" with courses=courses only %}
-    </div>
-
+    {% for section in section_order %}
+        {% if section == 'Projects' %}
+            {#    PROJECTS#}
+            <div class="row">
+                {% include "resume/_project_list.html" with projects=projects only %}
+            </div>
+        {% elif section == 'Experience' %}
+            {#    EXPERIENCE#}
+            <div class="row">
+                {% include "resume/_experience_list.html" with experiences=experiences only %}
+            </div>
+        {% elif section == 'Education' %}
+            {#    EDUCATION#}
+            <div class="row">
+                {% include "resume/_education_list.html" with education=education only %}
+            </div>
+        {% elif section == 'Skills' %}
+            {#    SKILL#}
+            <div class="row">
+                {% include "resume/_skill_list.html" with skills=skills only %}
+            </div>
+        {% elif section == 'Courses' %}
+            {#    COURSES#}
+            <div class="row">
+                {% include "resume/_courses_list.html" with courses=courses only %}
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

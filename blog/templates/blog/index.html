@@ -3,9 +3,11 @@
 {% block title %}Jonathan F Sanchez | Blog{% endblock %}
 
 {% block content %}
-    {% for blog in blogs %}
-        <a href="{% url 'blog:blog_view' slug=blog.url_title %}">{{ blog.title }}</a>
-    {% empty %}
-        No Blogs Yet
-    {% endfor %}
+    <div class="container">
+        {% for blog in blogs %}
+            <a href="{% url 'blog:blog_view' slug=blog.title_slug %}">{{ blog.title }}</a>
+        {% empty %}
+            No Blogs Yet
+        {% endfor %}
+    </div>
 {% endblock %}

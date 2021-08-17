@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from resume.models import SocialMedia, Education, Skill, Course, Experience, Project
+from resume.models import SocialMedia, Education, Skill, Course, Experience, Project, ResumeOrder
 
 
 @admin.register(SocialMedia)
@@ -16,7 +16,7 @@ class EducationAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('skill',)
+    list_display = ('skill', 'priority')
 
 
 @admin.register(Course)
@@ -32,3 +32,8 @@ class ExperienceAdmin(admin.ModelAdmin):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('year_start', 'title')
+
+
+@admin.register(ResumeOrder)
+class ResumeOrderAdmin(admin.ModelAdmin):
+    list_display = ('priority', 'section')

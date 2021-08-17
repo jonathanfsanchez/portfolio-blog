@@ -1,7 +1,7 @@
 <div class="container">
     <h4 class="display-5">Courses</h4>
     {% for course in courses %}
-        <div class="card border-0 mb-3">
+        <div class="card border-0 p-3">
             <div class="row no-gutters">
 
                 <div class="col-md-3">
@@ -18,7 +18,7 @@
                             {{ course.vendor }}
                         </h5>
                         <p class="card-text"><a href="{{ course.link }}">{{ course.title }}</a></p>
-                        <p class="card-text">{{ course.description }}</p>
+                        <p class="card-text">{{ course.description | safe }}</p>
 
                     </div>
                 </div>

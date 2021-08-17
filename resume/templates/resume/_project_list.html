@@ -1,7 +1,7 @@
 <div class="container">
     <h4 class="display-5">Projects</h4>
     {% for project in projects %}
-        <div class="card border-0 mb-3">
+        <div class="card border-0 p-3">
             <div class="row no-gutters">
 
                 <div class="col-md-3">
@@ -16,7 +16,7 @@
                             {% endif %}
                             <a href="{% url 'resume:project_detail' project.title_slug %}">{{ project.title }}</a>
                         </h5>
-                        <p class="card-text">{{ project.resume_content }}</p>
+                        <p class="card-text">{{ project.resume_content | safe }}</p>
                     </div>
                 </div>
             </div>

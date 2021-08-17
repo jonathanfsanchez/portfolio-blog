@@ -1,8 +1,7 @@
 import tinymce.models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
-get_rated_choices = list(zip(range(1, 10 + 1), range(1, 10 + 1)))
+from django.utils.translation import gettext_lazy as _
 
 
 class SocialMedia(models.Model):
@@ -50,10 +49,14 @@ class Education(models.Model):
 
 class Skill(models.Model):
     # TODO make a tag
-    skill = models.TextField()
+    skill = models.TextField(unique=True)
+    priority = models.PositiveSmallIntegerField()
+
+    # displayable in the SECTIONS area. not related to any reference from anywhere else.
+    displayable = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('skill',)
+        ordering = ('priority', 'skill')
 
     def __str__(self):
         return self.skill
@@ -68,10 +71,12 @@ class Course(models.Model):
     is_expiration = models.BooleanField()
 
     title = models.TextField()
-    description = models.TextField(blank=True, default='')
-    link = models.URLField()
+    description = tinymce.models.HTMLField(blank=True)
+    link = models.URLField(blank=True, null=True, default=None)
 
     small_icon = models.ImageField(blank=True, null=True, default=None)
+
+    skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
         ordering = ('-year_start',)
@@ -91,7 +96,7 @@ class Course(models.Model):
 class Experience(models.Model):
     company = models.TextField()
     company_small_logo = models.ImageField(blank=True, null=True, default=None)
-    company_link = models.URLField()
+    company_link = models.URLField(blank=True, null=True, default=None)
 
     month_start = models.PositiveSmallIntegerField()
     year_start = models.PositiveSmallIntegerField()
@@ -102,8 +107,10 @@ class Experience(models.Model):
     year_end = models.PositiveSmallIntegerField(blank=True, null=True, default=None)
 
     title = models.TextField()
-    description = models.TextField()
+    description = tinymce.models.HTMLField()
     location = models.TextField()
+
+    skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
         ordering = ('-year_start',)
@@ -132,9 +139,9 @@ class Experience(models.Model):
 class Project(models.Model):
     year_start = models.PositiveSmallIntegerField()
     year_end = models.PositiveSmallIntegerField(blank=True, null=True, default=None)
-    is_wip = models.BooleanField(default=False)
+    is_wip = models.BooleanField()
 
-    git_url = models.URLField()
+    git_url = models.URLField(blank=True, null=True, default=None)
     title = models.TextField()
     title_slug = models.SlugField()
 
@@ -142,12 +149,14 @@ class Project(models.Model):
     full_content = tinymce.models.HTMLField()
 
     # This is the condensed version for the resume page
-    resume_content = models.TextField()
+    resume_content = tinymce.models.HTMLField()
 
     project_logo = models.ImageField(blank=True, null=True, default=None)
 
     # TODO add tagging
     tags = models.TextField()
+
+    skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
         ordering = ('-year_start',)
@@ -170,3 +179,18 @@ class Project(models.Model):
 
     def get_tags(self):
         return self.tags.split()
+
+
+class ResumeOrder(models.Model):
+    class Sections(models.TextChoices):
+        PROJECT = 'PR', _('Projects')
+        EXPERIENCE = 'EX', _('Experience')
+        EDUCATION = 'ED', _('Education')
+        SKILLS = 'SK', _('Skills')
+        COURSES = 'CO', _('Courses')
+
+    section = models.CharField(max_length=2, choices=Sections.choices, unique=True)
+    priority = models.PositiveSmallIntegerField(unique=True)
+
+    class Meta:
+        ordering = ('priority', 'section',)
