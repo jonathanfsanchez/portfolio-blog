@@ -3,6 +3,8 @@
 {% block title %}Jonathan F Sanchez | Project {{ project.title }}{% endblock %}
 
 {% block content %}
-    <h2>{{ project.title }}</h2>
-    {{ project.full_content | safe }}
+    <div class="container">
+        <h2>{{ project.title }}</h2>
+        {{ project.full_content | safe }}
+    </div>
 {% endblock %}
