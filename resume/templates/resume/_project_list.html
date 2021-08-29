@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="col-md-9">
-                    <div class="card-body">
+                    <div class="card-body pb-0">
                         <h5 class="card-title">
                             {% if project.project_logo %}
                                 <img src="{{ project.project_logo.url }}" class="card-img" alt="...">
@@ -18,6 +18,14 @@
                         </h5>
                         <p class="card-text">{{ project.resume_content | safe }}</p>
                     </div>
+
+                    {% if project.skills.exists %}
+                        <div class="card-footer bg-white border-0 py-0">
+                            {% for skill in project.skills.all %}
+                                <span class="badge badge-pill badge-primary shadow-sm">{{ skill | lower }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

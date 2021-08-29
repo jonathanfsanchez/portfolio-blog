@@ -4,7 +4,7 @@
         <div class="card-body">
             {% for skill in skills %}
                 {% if skill.displayable %}
-                    <span class="badge badge-pill badge-primary">{{ skill.skill | lower }}</span>
+                    <span class="badge badge-pill badge-primary shadow-sm">{{ skill.skill | lower }}</span>
                 {% endif %}
             {% empty %}
                 No Skills to list=

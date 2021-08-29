@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="col-md-9">
-                    <div class="card-body">
+                    <div class="card-body pb-0">
                         <h5 class="card-title ">
                             <a href="{{ experience.company_link }}" class="pr-4">
                                 {% if experience.company_small_logo %}
@@ -23,6 +23,14 @@
                         </h5>
                         <p class="card-text">{{ experience.description | safe }}</p>
                     </div>
+
+                    {% if experience.skills.exists %}
+                        <div class="card-footer bg-white border-0 py-0">
+                            {% for skill in experience.skills.all %}
+                                <span class="badge badge-pill badge-primary shadow-sm">{{ skill | lower }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
                 </div>
             </div>
