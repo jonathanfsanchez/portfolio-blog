@@ -48,7 +48,7 @@ class Education(models.Model):
 
 
 class Skill(models.Model):
-    # TODO make a tag
+    tag = models.ForeignKey('tags.Tag', on_delete=models.CASCADE)
     skill = models.TextField(unique=True)
     priority = models.PositiveSmallIntegerField()
 
@@ -76,6 +76,7 @@ class Course(models.Model):
 
     small_icon = models.ImageField(blank=True, null=True, default=None)
 
+    tags = models.ForeignKey('tags.Tag', on_delete=models.CASCADE, blank=True, null=True, default=None)
     skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
@@ -110,6 +111,7 @@ class Experience(models.Model):
     description = tinymce.models.HTMLField()
     location = models.TextField()
 
+    tags = models.ForeignKey('tags.Tag', on_delete=models.CASCADE, blank=True, null=True, default=None)
     skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
@@ -153,9 +155,7 @@ class Project(models.Model):
 
     project_logo = models.ImageField(blank=True, null=True, default=None)
 
-    # TODO add tagging
-    tags = models.TextField()
-
+    tags = models.ForeignKey('tags.Tag', on_delete=models.CASCADE, blank=True, null=True, default=None)
     skills = models.ManyToManyField(Skill, blank=True)
 
     class Meta:
@@ -173,12 +173,6 @@ class Project(models.Model):
             range += "{year_end}".format(year_end=self.year_end)
 
         return range
-
-    def add_tag(self, new_tag):
-        self.tags = self.tags + " " + new_tag
-
-    def get_tags(self):
-        return self.tags.split()
 
 
 class ResumeOrder(models.Model):

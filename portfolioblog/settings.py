@@ -127,13 +127,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# Production Namecheap
+# STATIC_URL = '/static/'
+# STATIC_ROOT = '/home/jonauywg/public_html/static'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = '/home/jonauywg/public_html/media'
 
 # Development
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Production in SHARED hosting ENV such as namecheap.com CPANEL, must establish FTP account
-# MEDIA_URL= '/media/'
-# DEFAULT_FILE_STORAGE='storages.backends.ftp.FTPStorage'
-# FTP_STORAGE_LOCATION = 'ftp://<user>:<pw>@<host>:<port>/'

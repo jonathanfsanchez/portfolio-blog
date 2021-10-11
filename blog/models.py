@@ -10,8 +10,7 @@ class Post(models.Model):
     title = models.TextField()
     content = tinymce.models.HTMLField()
 
-    # TODO: tags
-    # tags = tagulous.models.TagField(to=SiteWideTags)
+    tags = models.ManyToManyField('tags.Tag', null=True)
 
     class Meta:
         ordering = ('-updated',)
