@@ -48,18 +48,17 @@ class Education(models.Model):
 
 
 class Skill(models.Model):
-    tag = models.ForeignKey('tags.Tag', on_delete=models.CASCADE)
-    skill = models.TextField(unique=True)
+    tag = models.OneToOneField('tags.Tag', on_delete=models.CASCADE)
     priority = models.PositiveSmallIntegerField()
 
     # displayable in the SECTIONS area. not related to any reference from anywhere else.
     displayable = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('priority', 'skill')
+        ordering = ('priority', 'tag')
 
     def __str__(self):
-        return self.skill
+        return self.tag.displayable_name
 
 
 class Course(models.Model):
@@ -76,8 +75,7 @@ class Course(models.Model):
 
     small_icon = models.ImageField(blank=True, null=True, default=None)
 
-    tags = models.ForeignKey('tags.Tag', on_delete=models.CASCADE, blank=True, null=True, default=None)
-    skills = models.ManyToManyField(Skill, blank=True)
+    tags = models.ManyToManyField('tags.Tag', null=True)
 
     class Meta:
         ordering = ('-year_start',)
@@ -111,8 +109,7 @@ class Experience(models.Model):
     description = tinymce.models.HTMLField()
     location = models.TextField()
 
-    tags = models.ForeignKey('tags.Tag', on_delete=models.CASCADE, blank=True, null=True, default=None)
-    skills = models.ManyToManyField(Skill, blank=True)
+    tags = models.ManyToManyField('tags.Tag', null=True)
 
     class Meta:
         ordering = ('-year_start',)
@@ -155,8 +152,7 @@ class Project(models.Model):
 
     project_logo = models.ImageField(blank=True, null=True, default=None)
 
-    tags = models.ForeignKey('tags.Tag', on_delete=models.CASCADE, blank=True, null=True, default=None)
-    skills = models.ManyToManyField(Skill, blank=True)
+    tags = models.ManyToManyField('tags.Tag', null=True)
 
     class Meta:
         ordering = ('-year_start',)

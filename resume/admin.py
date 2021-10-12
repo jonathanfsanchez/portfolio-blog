@@ -16,7 +16,7 @@ class EducationAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('skill', 'priority')
+    list_display = ('tag', 'priority')
 
 
 @admin.register(Course)

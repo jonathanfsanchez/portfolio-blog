@@ -5,7 +5,7 @@
             <div class="card-body">
                 {% for skill in skills %}
                     {% if skill.displayable %}
-                        <span class="badge badge-pill badge-primary shadow-sm">{{ skill.skill | lower }}</span>
+                        <span class="badge badge-pill badge-primary shadow-sm">{{ skill.tag | lower }}</span>
                     {% endif %}
                 {% endfor %}
             </div>
