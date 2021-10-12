@@ -8,12 +8,11 @@ Add icons to all your projects, experience, courses, and social media. Tag capab
 You can use the admin panel to manage your Blogs, Education, Experience, Courses, Projects, Skills, and Social Media.
 
 ## Dependencies
+`pip install django`
 
-`django`
+`pip install django-tinymce`
 
-`django-tinymce`
-
-`Pillow`
+`pip install Pillow`
 
 ## Building
 `python manage.py makemigrations tags blog resume`
@@ -25,4 +24,6 @@ You can use the admin panel to manage your Blogs, Education, Experience, Courses
 `python manage.py runserver`
 
 ## Demo
-see: [jonathanfsanchez.com](https://jonathanfsanchez.com)
+- [Homepage](https://jonathanfsanchez.com)
+- [Admin Panel](https://jonathanfsanchez.com/admin)
+- User: `demo` Password: `6r3vKEd1eZK%`
