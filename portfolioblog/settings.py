@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'SOME_KEY'
+SECRET_KEY = os.environ['DJANGO_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['IS_DEBUG']
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["jonathanfsanchez.com", "www.jonathanfsanchez.com", "127.0.0.1", "localhost"]
 
 # Application definition
 
@@ -127,17 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# Production Namecheap
-# STATIC_URL = '/static/'
-# STATIC_ROOT = '/home/jonauywg/public_html/static'
-
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = '/home/jonauywg/public_html/media'
-
-# Development
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.environ["STATIC_ROOT_PATH"]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+MEDIA_ROOT = os.environ["MEDIA_ROOT_PATH"]
