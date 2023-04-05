@@ -14,7 +14,13 @@ You can use the admin panel to manage your Blogs, Education, Experience, Courses
 
 `pip install Pillow`
 
-## Building
+## Running
+Set Environment Variables from `settings.py`:
+- DJANGO_KEY
+- IS_DEBUG
+- STATIC_ROOT_PATH
+- MEDIA_ROOT_PATH
+
 `python manage.py makemigrations tags blog resume`
 
 `python manage.py migrate`
