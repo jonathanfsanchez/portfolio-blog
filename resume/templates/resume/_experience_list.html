@@ -30,6 +30,8 @@
                         <a href="{{ experience.company_link }}" class="pr-4">
                             {{ experience.company }}
                         </a>
+                    {% else %}
+                        {{ experience.company }}
                     {% endif %}
                 </div>
 
