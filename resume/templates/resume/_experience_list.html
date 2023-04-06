@@ -16,17 +16,21 @@
                     {{ experience.title }}
                 </div>
 
-                <div class="col-md-3">
-                    <a href="{{ experience.company_link }}" class="pr-4">
-                        {% if experience.company_small_logo %}
-                            <img 
-                                src="{{ experience.company_small_logo.url }}"
-                                class="card-img" alt="..."
-                                style="width: 50px"
-                                >
-                        {% endif %}
-                        {{ experience.company }}
-                    </a>
+                <div class="col-md-1">
+                    {% if experience.company_small_logo %}
+                    <img 
+                        src="{{ experience.company_small_logo.url }}"
+                        class="card-img" alt="..."
+                        style="width: 50px"
+                        >
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if experience.company_link %}
+                        <a href="{{ experience.company_link }}" class="pr-4">
+                            {{ experience.company }}
+                        </a>
+                    {% endif %}
                 </div>
 
             </div>
