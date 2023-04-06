@@ -3,38 +3,58 @@
     <ul class="list-group list-group-flush">
 
     {% for experience in experiences %}
+
         <li class="list-group-item">
-            <div class="row">
+
+            <div class="row align-items-center">
+
                 <div class="col-md-3">
-                    <p class="text-muted pt-4">{{ experience.month_year_range_str }}</p>
-                    <p class="card-text"><small class="text-muted">{{ experience.location }}</small></p>
+                    <small class="text-muted">{{ experience.location }}</small>
+                </div>
+
+                <div class="col-md-6">
+                    {{ experience.title }}
+                </div>
+
+                <div class="col-md-3 text-end">
+                    <a href="{{ experience.company_link }}" class="pr-4">
+                        {% if experience.company_small_logo %}
+                            <img 
+                                src="{{ experience.company_small_logo.url }}"
+                                class="card-img" alt="..."
+                                style="width: 50px"
+                                >
+                        {% endif %}
+                        {{ experience.company }}
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="row align-items-center">
+
+                <div class="col-md-3">
+                    {{ experience.month_year_range_str }}
                 </div>
 
                 <div class="col-md-9">
-                    <div class="card-body pb-0">
-                        <h5 class="card-title ">
-                            <a href="{{ experience.company_link }}" class="pr-4">
-                                {% if experience.company_small_logo %}
-                                    <img src="{{ experience.company_small_logo.url }}" class="card-img pr-2" alt="..."
-                                         style="width: 50px">
-                                {% endif %}
-                                {{ experience.company }}
-                            </a>
-                            {{ experience.title }}
-                        </h5>
-                        <p class="card-text">{{ experience.description | safe }}</p>
-                    </div>
+                        <p>{{ experience.description | safe }}</p>
+                </div>
 
-                    {% if experience.skills.exists %}
-                        <div class="card-footer bg-white border-0 py-0">
-                            {% for skill in experience.skills.all %}
-                                <span class="badge badge-pill badge-primary shadow-sm">{{ skill | lower }}</span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-9">
+                    {% if experience.tags.exists %}
+                        <div class="flex">
+                            {% for tag in experience.tags.all %}
+                                <span class="badge text-bg-info shadow-sm">{{ tag | lower }}</span>
                             {% endfor %}
                         </div>
                     {% endif %}
-
                 </div>
-            </div>
         </li>
         {% empty %}
         No Experience to list
