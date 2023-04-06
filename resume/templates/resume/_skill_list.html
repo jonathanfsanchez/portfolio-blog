@@ -1,10 +1,31 @@
 {% if skills %}
     <div class="card">
-    <h4 class="card-header">Skills</h4>
+        <h4 class="card-header">
+            <div class="row align-items-center">
+                <div class="col">
+                Skills
+                </div>
+                <div class="col text-end">
+                    <a
+                        class="btn btn-primary btn-sm {% if not return_home %}disabled{% endif %}"
+                        href="{% url 'resume:resume_index' %}"
+                        role="button"
+                    >
+                        Clear Tag Filter
+                    </a>
+                </div>
+                
+            </div>
+        </h4>
             <div class="card-body">
                 {% for skill in skills %}
                     {% if skill.displayable %}
-                        <span class="badge text-bg-info shadow-sm">{{ skill.tag | lower }}</span>
+                        <a 
+                            href="{% url 'resume:tag_search' skill.tag.name_slug %}"
+                            class="btn btn-primary badge shadow-sm"
+                        >
+                            {{ skill.tag | lower }}
+                        </a>
                     {% endif %}
                 {% endfor %}
             </div>

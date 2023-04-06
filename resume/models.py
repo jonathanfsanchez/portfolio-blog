@@ -36,15 +36,19 @@ class Education(models.Model):
         ordering = ('-year_start',)
 
     def year_range_str(self):
-        return "{start} - {end}".format(start=self.year_start,
-                                        end=self.year_end if self.year_end else "Present")
+        return "{start} - {end}".format(
+            start=self.year_start,
+            end=self.year_end if self.year_end else "Present",
+        )
 
     year_range_str.short_description = "Dates"  # This is so the admin page has correct column header
 
     def __str__(self):
-        return "{years} : {school} - {major}".format(years=self.year_range_str(),
-                                                     school=self.school_name_acronym,
-                                                     major=self.major)
+        return "{years} : {school} - {major}".format(
+            years=self.year_range_str(),
+            school=self.school_name_acronym,
+            major=self.major
+        )
 
 
 class Skill(models.Model):
@@ -65,7 +69,12 @@ class Course(models.Model):
     vendor = models.TextField()
 
     year_start = models.PositiveSmallIntegerField(help_text="YYYY")
-    year_end = models.PositiveSmallIntegerField(help_text="YYYY", blank=True, null=True, default=None)
+    year_end = models.PositiveSmallIntegerField(
+        help_text="YYYY",
+        blank=True,
+        null=True,
+        default=None,
+    )
 
     is_expiration = models.BooleanField()
 
@@ -87,9 +96,11 @@ class Course(models.Model):
             return self.year_start
 
     def __str__(self):
-        return "{year} {vendor} - {title}".format(year=self.year_start,
-                                                  vendor=self.vendor,
-                                                  title=self.title)
+        return "{year} {vendor} - {title}".format(
+            year=self.year_start,
+            vendor=self.vendor,
+            title=self.title,
+        )
 
 
 class Experience(models.Model):
@@ -115,13 +126,17 @@ class Experience(models.Model):
         ordering = ('-year_start',)
 
     def month_year_range_str(self):
-        range = "{month_start:0>2d}/{year_start} - ".format(month_start=self.month_start,
-                                                            year_start=self.year_start)
+        range = "{month_start:0>2d}/{year_start} - ".format(
+            month_start=self.month_start,
+            year_start=self.year_start,
+        )
         if self.is_current_job:
             range += "Present"
         else:
-            range += "{month_end:0>2d}/{year_end}".format(month_end=self.month_end,
-                                                          year_end=self.year_end)
+            range += "{month_end:0>2d}/{year_end}".format(
+                month_end=self.month_end,
+                year_end=self.year_end,
+            )
 
         return range
 

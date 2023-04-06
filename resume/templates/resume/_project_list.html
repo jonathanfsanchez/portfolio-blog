@@ -33,7 +33,12 @@
                 </div>
                 <div class="col-md-10">
                     {% for tag in project.tags.all %}
-                        <span class="badge text-bg-info shadow-sm">{{ tag | lower }}</span>
+                        <a 
+                            href="{% url 'resume:tag_search' tag.name_slug %}"
+                            class="btn btn-primary badge shadow-sm"
+                            >
+                            {{ tag | lower }}
+                        </a>
                     {% endfor %}
                 </div>
             </div>
