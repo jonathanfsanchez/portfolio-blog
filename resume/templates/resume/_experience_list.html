@@ -1,9 +1,10 @@
-<div class="container">
-    <h4 class="display-5">Experience</h4>
-    {% for experience in experiences %}
-        <div class="card border-0 p-3">
-            <div class="row">
+<div class="card">
+    <div class="card-header h4">Experience</div>
+    <ul class="list-group list-group-flush">
 
+    {% for experience in experiences %}
+        <li class="list-group-item">
+            <div class="row">
                 <div class="col-md-3">
                     <p class="text-muted pt-4">{{ experience.month_year_range_str }}</p>
                     <p class="card-text"><small class="text-muted">{{ experience.location }}</small></p>
@@ -34,8 +35,10 @@
 
                 </div>
             </div>
-        </div>
-    {% empty %}
+        </li>
+        {% empty %}
         No Experience to list
-    {% endfor %}
+        {% endfor %}
+    </ul>
+
 </div>

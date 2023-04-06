@@ -1,15 +1,13 @@
 {% if skills %}
-    <div class="container">
-        <h4 class="display-5">Skills</h4>
-        <div class="card border-0 p-3">
+    <div class="card">
+    <h4 class="card-header">Skills</h4>
             <div class="card-body">
                 {% for skill in skills %}
                     {% if skill.displayable %}
-                        <span class="badge badge-pill badge-primary shadow-sm">{{ skill.tag | lower }}</span>
+                        <span class="badge text-bg-info shadow-sm">{{ skill.tag | lower }}</span>
                     {% endif %}
                 {% endfor %}
             </div>
-        </div>
     </div>
 {% endif %}
 
