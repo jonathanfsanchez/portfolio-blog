@@ -1,75 +1,75 @@
-<div class="card">
-    <div class="card-header h4">Experience</div>
-    <ul class="list-group list-group-flush">
+{% if experiences|length > 0 %}
+    <div class="card">
+        <div class="card-header h4">Experience</div>
+        <ul class="list-group list-group-flush">
 
-    {% for experience in experiences %}
+        {% for experience in experiences %}
 
-        <li class="list-group-item">
+            <li class="list-group-item py-4">
 
-            <div class="row align-items-center">
-                <div class="col-md-2"></div>
+                <div class="row align-items-center">
+                    <div class="col-md-2"></div>
 
-                <div class="col-md-3">
-                    {% if experience.company_small_logo %}
-                    <img 
-                        src="{{ experience.company_small_logo.url }}"
-                        class="card-img" alt="..."
-                        style="width: 50px"
-                        >
-                    {% endif %}
-                    {% if experience.company_link %}
-                    <a href="{{ experience.company_link }}">
+                    <div class="col-md-3">
+                        {% if experience.company_small_logo %}
+                        <img 
+                            src="{{ experience.company_small_logo.url }}"
+                            class="card-img" alt="..."
+                            style="width: 50px"
+                            >
+                        {% endif %}
+                        {% if experience.company_link %}
+                        <a href="{{ experience.company_link }}">
+                            {{ experience.company }}
+                        </a>
+                        {% else %}
                         {{ experience.company }}
-                    </a>
-                    {% else %}
-                    {{ experience.company }}
-                    {% endif %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        {{ experience.title }}
+                    </div>
+
+                    <div class="col-md-3 text-end">
+                        <small class="text-muted">{{ experience.location }}</small>
+                    </div>
+
+
                 </div>
 
-                <div class="col-md-4 text-center">
-                    {{ experience.title }}
+                <div class="row align-items-center">
+
+                    <div class="col-md-2">
+                        {{ experience.month_year_range_str }}
+                    </div>
+
+                    <div class="col-md-10">
+                            <p>{{ experience.description | safe }}</p>
+                    </div>
+
                 </div>
 
-                <div class="col-md-3 text-end">
-                    <small class="text-muted">{{ experience.location }}</small>
-                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        {% if experience.tags.exists %}
+                            <div class="flex">
+                                {% for tag in experience.tags.all %}
+                                    <a 
+                                        href="{% url 'resume:tag_search' tag.name_slug %}"
+                                        class="btn btn-primary badge shadow-sm"
+                                        >
+                                        {{ tag | lower }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+            </li>
+            {% endfor %}
+        </ul>
 
-
-            </div>
-
-            <div class="row align-items-center">
-
-                <div class="col-md-2">
-                    {{ experience.month_year_range_str }}
-                </div>
-
-                <div class="col-md-10">
-                        <p>{{ experience.description | safe }}</p>
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-10">
-                    {% if experience.tags.exists %}
-                        <div class="flex">
-                            {% for tag in experience.tags.all %}
-                                <a 
-                                    href="{% url 'resume:tag_search' tag.name_slug %}"
-                                    class="btn btn-primary badge shadow-sm"
-                                    >
-                                    {{ tag | lower }}
-                                </a>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-        </li>
-        {% empty %}
-        No Experience to list
-        {% endfor %}
-    </ul>
-
-</div>
+    </div>
+{% endif %}

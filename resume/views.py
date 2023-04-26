@@ -35,11 +35,12 @@ def project_detail(request, slug, template_name='resume/project.html'):
     return render(request, template_name, context=context)
 
 
-def tag_search(request, slug, template_name='resume/tags_page.html'):
+def tag_search(request, slug, template_name='resume/index.html'):
     context = dict()
     tag = get_object_or_404(Tag, name_slug=slug)
 
     context['tag'] = tag
+    context['is_tag_page'] = True
     context['section_order'] = []
     resume_order = ResumeOrder.objects.all()
     for section in resume_order:
@@ -53,7 +54,13 @@ def tag_search(request, slug, template_name='resume/tags_page.html'):
         elif section_label == ResumeOrder.Sections.EDUCATION.label:
             context['education'] = Education.objects.all()
         elif section_label == ResumeOrder.Sections.SKILLS.label:
-            context['skills'] = Skill.objects.filter(tag=tag).all()
+            skills = Skill.objects.filter(tag=tag).all()
+
+            # condition where project has a skill that is not listed on skills
+            if len(skills) == 0:
+                skills = [Skill(tag=tag, displayable=True)]
+
+            context['skills'] = skills
         elif section_label == ResumeOrder.Sections.COURSES.label:
             context['courses'] = Course.objects.filter(tags=tag).all()
 
